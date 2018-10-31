@@ -47,7 +47,7 @@ class RemedyForm extends Component {
 
     render() {
         return (
-            <View style={{ paddingTop: height / 8 }}>
+            <View style={{ paddingTop: 50 }}>
                 {
                     this.state.pleaseWait && <View style={{ paddingTop: height / 2, alignContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: 30, fontWeight: 'bold' }}>
