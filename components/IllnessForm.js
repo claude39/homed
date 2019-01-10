@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, TextInput, View, TouchableOpacity, Image, ScrollView, FlatList, Alert, TouchableHighlight, KeyboardAvoidingView } from 'react-native'
+import { Text, Dimensions, TextInput, View, TouchableOpacity, Image, ScrollView, FlatList, Alert, TouchableHighlight, KeyboardAvoidingView } from 'react-native'
+const { height } = Dimensions.get('screen')
 import firebaseService from '../firebase'
 import { Actions } from 'react-native-router-flux'
 import { Permissions, ImagePicker } from 'expo'
@@ -14,7 +15,8 @@ class IllnessForm extends Component {
             selected: [],
             somethingClicked: false,
             image: '',
-            pleaseWait: false
+            pleaseWait: false,
+            causes: ''
         }
 
         this.handleName = (name) => {
@@ -23,6 +25,10 @@ class IllnessForm extends Component {
 
         this.handleDescription = (description) => {
             this.setState({ description: description })
+        }
+
+        this.handleCauses = (causes) => {
+            this.setState({ causes: causes })
         }
 
         this.pickImage = async () => {
@@ -44,6 +50,7 @@ class IllnessForm extends Component {
                 snap.ref.getDownloadURL().then(async url => {
                     await firebaseService.database().ref('illnesses').push({
                         name: this.state.name,
+                        causes: this.state.causes,
                         description: this.state.description,
                         remedies: this.getRemedies(),
                         imageurl: url
@@ -123,6 +130,19 @@ class IllnessForm extends Component {
                             returnKeyType='next'
                             onChangeText={this.handleDescription}
                             value={this.state.description}
+                            underlineColorAndroid={'transparent'} />
+                        <TextInput
+                            style={{
+                                backgroundColor: '#ffffff',
+                                height: 40,
+                                margin: 10,
+                                borderRadius: 5,
+                                padding: 3,
+                            }}
+                            placeholder={'Causes'}
+                            returnKeyType='next'
+                            onChangeText={this.handleCauses}
+                            value={this.state.causes}
                             underlineColorAndroid={'transparent'} />
                         <ScrollView>
                             <View>

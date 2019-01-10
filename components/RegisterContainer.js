@@ -47,15 +47,15 @@ class FormComponent extends Component {
                     value={this.state.password}
                     underlineColorAndroid={'transparent'} />
 
-                <TouchableOpacity style={styles.button} onPress={() => {
+                <TouchableOpacity style={styles.button} onPress={async () => {
                     let user = {
                         username: this.state.username,
                         password: this.state.password
                     }
 
-                    firebaseService.database().ref('users').push(user, snap => {
-                        console.log(snap)
-                    })
+                    let snap = await firebaseService.database().ref('users').push(user).once('value')
+                    user.id = snap.key
+                    Actions.home({ user: user })
                 }
                 }>
                     <Text style={styles.buttonTitle}> Submit </Text>

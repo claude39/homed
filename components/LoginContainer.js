@@ -34,7 +34,11 @@ class FormComponent extends Component {
                     })[0]
                     if (user.password === this.state.password) {
                         this.setState({ exist: true })
-                        Actions.home({ user: user })
+                        if (user.username === 'admin' && user.password === 'admin') {
+                            Actions.adminhome({ type: ActionConst.RESET })
+                        } else {
+                            Actions.home({ user: user, type: ActionConst.RESET })
+                        }
                     } else {
                         this.setState({ exist: false })
                     }

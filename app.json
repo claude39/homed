@@ -1,12 +1,12 @@
 {
   "expo": {
     "name": "HoMed",
-    "description": "This project is really great.",
+    "description": "Home Remedies for Upper Respiratory Illness Symptoms",
     "slug": "HoMed",
     "privacy": "public",
     "sdkVersion": "30.0.0",
     "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./imgs/icon.png",
     "splash": {
@@ -22,6 +22,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.claudejacob.homed"
     }
   }
 }
